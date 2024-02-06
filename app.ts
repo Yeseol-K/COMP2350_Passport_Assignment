@@ -7,6 +7,16 @@ import passportMiddleware from './middleware/passportMiddleware';
 const port = process.env.port || 8000;
 
 const app = express();
+declare global {
+  namespace Express {
+      interface User {
+        id: number,
+        name: string,
+        email: string,
+        password: string,
+      }
+    }
+  };
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
