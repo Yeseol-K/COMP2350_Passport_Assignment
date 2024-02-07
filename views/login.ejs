@@ -4,6 +4,17 @@
       <h1 class="mb-3">
         <img src="/secure-icon.png" alt="icon" width="20%" />
       </h1>
+      <style>
+        #error {
+          color: rgb(235, 64, 64);
+          font-weight: bold;
+        }
+      </style>
+      <div id="error">
+        <% if (errorMsg) { %>
+          <%= errorMsg[errorMsg.length - 1] %>
+        <% } %>
+      </div>
       <h2>Login</h2>
       <form action="/auth/login" method="POST">
         <div class="form-group">

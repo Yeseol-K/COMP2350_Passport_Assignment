@@ -1,11 +1,19 @@
 import express from "express";
 import passport from 'passport';
 import { forwardAuthenticated } from "../middleware/checkAuth";
+import { getUserByEmailIdAndPassword } from "../controllers/userController";
+import { userModel } from "../models/userModel";
+import { Session } from "inspector";
 
 const router = express.Router();
-
-router.get("/login", forwardAuthenticated, (req, res) => {
-  res.render("login");
+declare module "express-session" {
+  interface SessionData {
+    messages: string[];
+  }
+}
+router.get("/login", forwardAuthenticated, (req, res) => { 
+  const errorMsg = (req.session.messages);
+  res.render("login", {errorMsg: errorMsg});
 })
 
 router.post(
@@ -13,7 +21,7 @@ router.post(
   passport.authenticate("local", {
     successRedirect: "/dashboard",
     failureRedirect: "/auth/login",
-    failureMessage: true
+    failureMessage: true,
   })
 );
 

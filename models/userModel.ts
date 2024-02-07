@@ -27,6 +27,7 @@ const userModel = {
     if (user) {
       return user;
     }
+    // return null;
     throw new Error(`Couldn't find user with email: ${email}`);
   },
 
@@ -35,6 +36,7 @@ const userModel = {
     if (user) {
       return user;
     }
+    // return null;
     throw new Error(`Couldn't find user with id: ${id}`);
   },
 };
