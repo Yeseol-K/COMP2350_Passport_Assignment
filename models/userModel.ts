@@ -1,21 +1,24 @@
-const database = [
+const database: Express.User[] = [
   {
     id: 1,
     name: "Jimmy Smith",
     email: "jimmy123@gmail.com",
     password: "jimmy123!",
+    role: "admin",
   },
   {
     id: 2,
     name: "Johnny Doe",
     email: "johnny123@gmail.com",
     password: "johnny123!",
+    role: "user",
   },
   {
     id: 3,
     name: "Jonathan Chen",
     email: "jonathan123@gmail.com",
     password: "jonathan123!",
+    role: "user",
   },
 ];
 
@@ -39,6 +42,20 @@ const userModel = {
     // return null;
     throw new Error(`Couldn't find user with id: ${id}`);
   },
+
+  findOrCreate: (profile: any): Express.User => {
+    const user = database.find((user) => user.id === profile.id);
+    if (!user) {
+      const newUser = {
+        id: Number(profile.id),
+        name: profile.username,
+      };
+      database.push(newUser);
+      return newUser;
+    }
+    return user;
+
+  }
 };
 
 export { database, userModel };

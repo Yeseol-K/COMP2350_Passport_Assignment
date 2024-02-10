@@ -9,6 +9,11 @@
           color: rgb(235, 64, 64);
           font-weight: bold;
         }
+        #or {
+          font-size: large;
+          font-weight: bold;
+          margin: 10px 0;
+        }
       </style>
       <div id="error">
         <% if (errorMsg) { %>
@@ -39,6 +44,10 @@
         </div>
         <button type="submit" class="btn btn-primary btn-block">Login</button>
       </form>
+        <p id="or">OR</p>
+        <button type="submit" class="btn btn-primary btn-block" style="background-color: rgb(80, 80, 80); color: white;">
+          <a href="/auth/login/github" style="text-decoration: none; color: inherit;">Login with GitHub</a>
+        </button>
       <p class="mt-4">New User? <a href="/auth/register">Register</a></p>
       <p>Forgot Password? <a href="/auth/forgot">Reset</a></p>
     </div>

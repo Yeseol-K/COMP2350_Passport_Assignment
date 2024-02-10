@@ -1,8 +1,13 @@
 import express from "express";
 import expressLayouts from "express-ejs-layouts";
 import session from "express-session";
-import path from "path";
 import passportMiddleware from './middleware/passportMiddleware';
+import * as path from "path";
+import dotenv from "dotenv";
+
+dotenv.config({
+  path: path.relative(process.cwd(), path.join(__dirname, ".env")),
+});
 
 const port = process.env.port || 8000;
 
@@ -12,8 +17,9 @@ declare global {
       interface User {
         id: number,
         name: string,
-        email: string,
-        password: string,
+        email?: string,
+        password?: string,
+        role?: string,
       }
     }
   };

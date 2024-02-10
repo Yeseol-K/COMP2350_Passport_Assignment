@@ -13,4 +13,5 @@ export default class PassportConfig {
             passport.use(passportStrategy.name, passportStrategy.strategy);
         });
     }
+    
 }
