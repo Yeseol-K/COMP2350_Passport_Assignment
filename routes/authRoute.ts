@@ -2,8 +2,11 @@ import express, { Router } from "express";
 import passport from 'passport';
 import { forwardAuthenticated } from "../middleware/checkAuth";
 import { getUserByEmailIdAndPassword } from "../controllers/userController";
-import { userModel } from "../models/userModel";
+import { database, userModel } from "../models/userModel";
 import { Session } from "inspector";
+import sessions from "express-session";
+import store from "express-session";
+
 
 const router = express.Router();
 declare module "express-session" {
@@ -39,6 +42,10 @@ router.get("/github/callback",
 
 
 router.get("/logout", (req, res) => {
+  // const user = database.find((user) => user.role === "admin");
+  // if (user) {
+  //   res.render("admin")
+  // } else {
   req.logout((err) => {
     if (err) console.log(err);
   });
