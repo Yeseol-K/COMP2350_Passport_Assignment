@@ -3,7 +3,7 @@ import session from "express-session";
 import Store from "express-session";
 const router = express.Router();
 const app = express();
-import { forwardRole, ensureAuthenticated, ensureAdminAuthenticated } from "../middleware/checkAuth";
+import { forwardRole, ensureAuthenticated, ensureAdminAuthenticated, ensureUserAuthenticated } from "../middleware/checkAuth";
 import { database, userModel } from "../models/userModel";
 import { allowedNodeEnvironmentFlags } from "process";
 import RedisStore from "connect-redis";
@@ -23,6 +23,8 @@ router.get("/", (req, res) => {
     res.send("welcome");
   }
 });
+
+
 
 let redisClient = createClient({
 url: "redis://localhost:6379",
@@ -49,6 +51,12 @@ app.use(
     },
   })
 );
+
+router.get("/dashboard", ensureAuthenticated, ensureUserAuthenticated, (req, res) => {
+  const user = req.user;
+  const userRole = req.user?.role;
+  res.send("this page is working")
+});
 
 router.get("/admin", ensureAuthenticated, ensureAdminAuthenticated, (req, res) => {
     const user = req.user;

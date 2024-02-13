@@ -23,11 +23,21 @@ export const forwardRole = (req: Request, res: Response, next: NextFunction) => 
 }
 
 export const ensureAdminAuthenticated = (req: Request, res: Response, next: NextFunction) => {
-  if (req.isAuthenticated()) {
+ 
     if (req.user && req.user.role === "admin") {
-      return next();
+      next();
+    } else {
+      res.redirect("/auth/login");
     }
-    res.redirect("/dashboard");
-  }
-  res.redirect("/auth/login");
-};
+  };
+
+
+
+export const ensureUserAuthenticated = (req: Request, res: Response, next: NextFunction) => {
+ 
+    if (req.user && req.user.role === "user") {
+      next();
+    } else {
+    res.redirect("/admin");
+    }
+  };

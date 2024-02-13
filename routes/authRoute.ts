@@ -11,7 +11,10 @@ import store from "express-session";
 const router = express.Router();
 declare module "express-session" {
   interface SessionData {
+    sessionID: any,
+    userID: any,
     messages: string[];
+
   }
 }
 //local login
@@ -42,10 +45,6 @@ router.get("/github/callback",
 
 
 router.get("/logout", (req, res) => {
-  // const user = database.find((user) => user.role === "admin");
-  // if (user) {
-  //   res.render("admin")
-  // } else {
   req.logout((err) => {
     if (err) console.log(err);
   });
