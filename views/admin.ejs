@@ -2,11 +2,11 @@
 <p class="lead mb-3">Welcome <%= user.name %></p>
 <br>
 <p>Current Active Sessions:</p>
-<p>SessionID: 
-  <% sessions.forEach(session => { %>
-  <a href="/dashboard/revoke/<%= session %>"><%= session %></a>
+<p>
+  <% userData.forEach(data => { %>
+    SessionID: <a href="/dashboard/revoke/<%= data.sessionId %>"><%= data.sessionId %></a><br>
+    UserID: <%=data.userId%><br>
   <% }); %>
 </p>
-<p>UserID: <%= user.id %></p>
 <a href="/auth/login">Revoke Session</a>
 
